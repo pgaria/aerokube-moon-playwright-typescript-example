@@ -25,21 +25,25 @@ This project was inspired by the lack of good and easily explained examples when
     // Set Moon Host here
     const moonHost = 'moon.dataout.in.example.com';
     ```
-    And Configure projects for major browsers, currently the chromium is set with the complete URL. The Playwright version is extracted from the package.json file and appended in the URL as playwright browser image works with the version dependency.
+    And configure projects for major browsers, currently the chromium is set with the complete URL. The Playwright version is extracted from the package.json file and appended in the URL as playwright browser image works with the version dependency.
 
     ```javascript
-     /* UPdate here for other browsers like chrome or firefox.*/
-  projects: [
-    {
-      name: 'chromium',
-      use: {
-        browserName: 'chromium',
-        connectOptions: {
-          wsEndpoint: `wss://${moonHost}/playwright/chromium/playwright-${playwrightVersion()}?headless=false&arg=--ignore-certificate-errors`,
+    // playwright.config.js
+    const { defineConfig } = require('@playwright/test');
+
+    module.exports = defineConfig({
+      projects: [
+        {
+          name: 'chromium',
+          use: {
+            browserName: 'chromium',
+            connectOptions: {
+              wsEndpoint: `wss://${moonHost}/playwright/chromium/playwright-${playwrightVersion()}?headless=false&arg=--ignore-certificate-errors`,
+            },
+              },
         },
-      },
-    }
-    ]
+      ],
+    });
     ```
 
 2. Update the `environment.config.js` file with your aplication URL,Currenly its pointing to saucedemo website for example.:
